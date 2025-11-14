@@ -250,10 +250,16 @@ const Home = () => {
                     <h3 className="text-sm font-semibold text-gray-800 line-clamp-2 mb-2 px-1 leading-relaxed">
                       {product.title}
                     </h3>
-                    <div className="text-green-600 text-sm font-bold">
+                    <div className="text-green-600 text-sm font-bold mb-2">
                       From {formatCurrency(product.price * 0.8)}
                     </div>
-                    <div className="text-xs text-gray-500 mt-1 mb-3">⭐ {product.rating?.rate || 4.5}+ ratings</div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="bg-green-500 text-white px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1 shadow-md">
+                        <span>★</span>
+                        <span>{product.rating?.rate || 4.2}</span>
+                      </div>
+                      <span className="text-xs text-gray-500">({product.rating?.count || 128})</span>
+                    </div>
                     <button 
                       onClick={(e) => handleAddToCart(e, product)}
                       className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold text-xs hover:bg-blue-700 transition-colors"
@@ -314,7 +320,7 @@ const Home = () => {
                       {/* Button */}
                       <button 
                         onClick={(e) => handleAddToCart(e, product)}
-                        className="w-full bg-pink-600 text-white py-2.5 rounded-xl font-semibold text-sm hover:bg-pink-700 transition-colors shadow-md hover:shadow-lg active:scale-95"
+                        className="w-full bg-blue-600 text-white py-2.5 rounded-xl font-semibold text-sm hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg active:scale-95"
                       >
                         Add to Cart
                       </button>
