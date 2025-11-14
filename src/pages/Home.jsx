@@ -271,45 +271,57 @@ const Home = () => {
       {/* Fashion Section */}
       {fashion.length > 0 && (
         <section className="container-custom py-12 mb-6">
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-            <div className="px-8 py-6 border-b border-gray-200 flex items-center justify-between bg-gradient-to-r from-pink-50 to-rose-50">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-pink-100 to-rose-200 rounded-2xl flex items-center justify-center shadow-md">
-                  <FaTshirt className="text-pink-600 text-3xl" />
-                </div>
-                <h2 className="text-3xl font-bold text-gray-900">Fashion Essentials</h2>
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <FaTshirt className="text-white text-2xl" />
               </div>
-              <Link to="/shop?category=men's clothing" className="text-blue-600 hover:text-blue-700 text-sm font-bold px-6 py-2.5 bg-blue-50 rounded-lg hover:bg-blue-100 transition-all">
-                See All →
-              </Link>
+              <h2 className="text-3xl font-bold text-gray-900">Fashion Essentials</h2>
             </div>
-            <div className="p-8 bg-gradient-to-b from-white to-gray-50">
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
-                {fashion.map((product) => (
-                  <Link key={product.id} to={`/product/${product.id}`} className="group text-center">
-                    <div className="bg-white rounded-2xl p-5 mb-4 shadow-lg border-2 border-gray-100">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+              {fashion.map((product) => (
+                <Link key={product.id} to={`/product/${product.id}`} className="group">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
+                    {/* Image Container */}
+                    <div className="relative bg-gray-50 p-4 h-48 flex items-center justify-center overflow-hidden">
                       <img 
                         src={product.image} 
                         alt={product.title} 
-                        className="w-full h-40 object-contain"
+                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                       />
+                      {/* Discount Badge */}
+                      <div className="absolute top-3 right-3 bg-red-600 text-white px-3 py-1 rounded-lg text-xs font-bold shadow-lg">
+                        40% OFF
+                      </div>
                     </div>
-                    <h3 className="text-sm font-semibold text-gray-800 line-clamp-2 mb-2 px-1 leading-relaxed">
-                      {product.title}
-                    </h3>
-                    <div className="flex items-center justify-center gap-2 mb-3">
-                      <span className="text-sm font-bold text-gray-900">{formatCurrency(product.price * 0.8)}</span>
-                      <span className="text-xs text-orange-600 font-semibold bg-orange-50 px-2 py-1 rounded">40% OFF</span>
+                    
+                    {/* Content */}
+                    <div className="p-4 flex flex-col flex-grow">
+                      <h3 className="text-sm font-semibold text-gray-800 line-clamp-2 mb-3 leading-tight flex-grow">
+                        {product.title}
+                      </h3>
+                      
+                      {/* Price */}
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-lg font-bold text-gray-900">
+                          ₹{Math.floor(product.price * 0.8)}
+                        </span>
+                        <span className="text-xs text-gray-500 line-through">
+                          ₹{Math.floor(product.price)}
+                        </span>
+                      </div>
+                      
+                      {/* Button */}
+                      <button 
+                        onClick={(e) => handleAddToCart(e, product)}
+                        className="w-full bg-pink-600 text-white py-2.5 rounded-xl font-semibold text-sm hover:bg-pink-700 transition-colors shadow-md hover:shadow-lg active:scale-95"
+                      >
+                        Add to Cart
+                      </button>
                     </div>
-                    <button 
-                      onClick={(e) => handleAddToCart(e, product)}
-                      className="w-full bg-gradient-to-r from-pink-600 to-rose-600 text-white py-2 rounded-lg font-semibold text-xs hover:from-pink-700 hover:to-rose-700 transition-colors"
-                    >
-                      Add to Cart
-                    </button>
-                  </Link>
-                ))}
-              </div>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
